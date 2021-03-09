@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Reserva.Data;
+using Reserva.Services;
 
 namespace Reserva.Web
 {
@@ -35,6 +36,9 @@ namespace Reserva.Web
                 opts.EnableDetailedErrors();
                 opts.UseNpgsql(Configuration.GetConnectionString("Reserva.dev"));
             });
+
+            services.AddScoped<IContactService, ContactService>();
+            services.AddScoped<IBookingsService, BookingsService>();
             
             services.AddSwaggerGen(c =>
             {

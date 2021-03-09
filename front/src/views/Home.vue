@@ -58,12 +58,12 @@
             <v-col xs="3" sm="3" md="3">
               <v-btn
                 text
-                v-if="reservation.favorite"
+                v-if="!reservation.favorite"
                 @click="addFavorite(reservation, reservation.id)"
               >
                 Add Favorites <v-icon> mdi-heart-settings </v-icon></v-btn
               >
-              <v-btn text disabled v-if="!reservation.favorite">
+              <v-btn text disabled v-if="reservation.favorite">
                 Add Favorites <v-icon> mdi-heart-settings </v-icon></v-btn
               >
             </v-col>
@@ -319,6 +319,7 @@ export default {
         contactId: item.contactId,
         favorite: !item.favorite,
       };
+      console.log(data);
       axios.put(`${this.api}/${id}`, data).then(() => {
         this.$store.dispatch("loadReservations", this.api);
       });
@@ -345,7 +346,7 @@ export default {
         title: this.titleR,
         ranking: this.ranking,
         contactId: this.contactId,
-        favorite: this.favorite,
+        favorite: this.switch1,
         date: this.datetime,        
       };
       axios.put(`${this.api}/${this.id}`, datos).then(() => {
@@ -358,10 +359,8 @@ export default {
 </script>
 
 <style>
-.reservation.true {
-  border-left: 4px solid red;
-}
+
 .reservation.false {
-  border-left: 5px solid white;
+  border-left: 5px solid red;
 }
 </style>

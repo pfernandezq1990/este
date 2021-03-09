@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using Reserva.Data;
 using Reserva.Data.Models;
+using Reserva.Services;
 
 namespace Reserva.Web.Controllers
 {
@@ -16,82 +17,126 @@ namespace Reserva.Web.Controllers
     [ApiController]
 
     public class ContactController : ControllerBase {
-        private readonly ReservationDbContext _context;
 
-        public ContactController(ReservationDbContext context) {
-            _context = context;
+        private readonly IContactService service;
+        public ContactController(IContactService _service) {
+            service = _service;
         }
-        private bool ContactExist(int id)
-        {
-            return _context.Contacts.Any(c => c.Id == id);
-        }
+        // private bool ContactExist(int id)
+        // {
+        //     return _service.Exist(id);
+        // }
 
+
+        // Get all Contacts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Contact>>> Get() {
-            return await _context.Contacts.ToListAsync();
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<Contact>> Post([FromBody] Contact contact) {
-            _context.Contacts.Add(contact);
-            await _context.SaveChangesAsync();
-            
-            return CreatedAtAction(nameof(Get), new {id = contact.Id}, contact);
-        }
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Contact>> Get(int id){
-            var contact = await _context.Contacts.FindAsync(id);
-            if (contact == null)
-            {
-                return NotFound();
-            }
-
-            return contact;
-        }
-
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Contact>> Put(int id, [FromBody] Contact contact) {
-            if (id != contact.Id)
-            {
-                return BadRequest();
-            }
-    
-            _context.Entry(contact).State = EntityState.Modified;
-
+        public async Task<IActionResult> Get() {
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ContactExist(id))
+                var contacts = await service.List();
+                if (contacts == null)
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw; 
-                }
-                
+
+                return Ok(contacts);
             }
-
-            return NoContent();
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Contact>> Delete(int id) {
-
-            var contactToDelete = await _context.Contacts.FindAsync(id);
-            if (contactToDelete == null)
+            catch (Exception)
             {
-                return NotFound();
+                return BadRequest();
+            }
+        }
+
+
+        //Create a Contact
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] Contact contact) {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var contactId = await service.Create(contact);
+                    if (contactId > 0)
+                    {
+                        return Ok(contactId);
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
+                }
+                catch (Exception)
+                {
+                    return BadRequest();
+                }
             }
 
-            _context.Contacts.Remove(contactToDelete);
-            await _context.SaveChangesAsync();
-
-            return contactToDelete;
+            return BadRequest();
         }
+
+        //Find Contact by Id
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id) {
+            var contact = await service.GetById(id);
+            if (contact != null)
+            {
+                return Ok(contact);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+        // Update a contact
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put([FromBody] Contact contact) {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await service.Update(contact);
+
+                    return Ok();
+                }
+                catch (Exception ex)
+                {
+                    if (ex.GetType().FullName == "Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException")
+                    {
+                        return NotFound();
+                    }
+                    return BadRequest();
+                }
+            }
+            return BadRequest();
+        }
+
+        // Delete a contact
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int? id) {
+            int result = 0;
+            if (id == null)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                result = await service.Delete(id);
+                if (result == 0)
+                {
+                    return NotFound();
+                }
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+      
     }
 }

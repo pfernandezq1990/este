@@ -342,6 +342,7 @@ export default {
       this.name = item.name;
       this.type = item.contactType;
       this.phone = item.phone;
+      this.date = new Date(item.birthdate).toISOString().substr(0, 10);
       this.dialog = true;
     },
 
