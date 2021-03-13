@@ -1,0 +1,41 @@
+{
+    "appBar": {
+        "Des1": "Desarrollo de software",
+        "Des2": "de clase mundial"
+    },
+    "links": {
+        "contact": "Contactos",
+        "reservations": "Reservasiones"
+    },
+    "toolBar": {
+        "title": "Lista de Reservaciones",
+        "des": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique illum recusandae itaque, ipsam sequi reiciendis reprehenderit ab perspiciatis",
+        "btn": "Crear Reservación"
+    },
+    "sort": {
+        "opcion1": "Por fecha ascendente",
+        "opcion2": "Por fecha descendente",
+        "opcion3": "Por orden alfabético ascendente",
+        "opcion4": "Por orden alfabético descendente",
+        "opcion5": "Por clasificación",
+        "text": "Ordenar"
+    },
+    "home": {
+        "btnEdit": "Editar",
+        "btnFavorite": "Añadir a Favoritos",
+        "textRanking": "Clasificación"
+    },
+    "table": {
+        "title": "Lista de contactos",
+        "name": "Nombre",
+        "type": "Tipo de Contacto",
+        "phone": "Teléfono",
+        "birthdate": "Fecha de nacimiento",
+        "actions": "Acciones",
+        "footer": "Contactos por página"
+    },
+    "editForm": {
+        "cardTitle": "Editar Contacto",
+        "name" : "Nombre"
+    }
+}

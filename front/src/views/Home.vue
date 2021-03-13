@@ -11,14 +11,14 @@
       <v-menu custom rounded offset-y color="grey">
         <template v-slot:activator="{ attrs, on }">
           <v-btn color="grey" class="white--text ma-5" v-bind="attrs" v-on="on">
-            {{ sort }}
+            {{ $t(sort) }}
           </v-btn>
         </template>
 
         <v-list>
           <v-list-item v-for="item in itemList" :key="item" link>
             <v-list-item-title
-              v-text="item"
+              v-text=" $t( item) "
               @click="sortBy(item)"
             ></v-list-item-title>
           </v-list-item>
@@ -45,7 +45,7 @@
             </v-col>
             <v-col sm="3" md="3" class="d-none d-sm-flex">
               <div>
-                Ranking <br />
+                {{ $t("home.textRanking") }} <br />
                 <v-rating
                   color="amber"
                   :value="reservation.ranking"
@@ -61,14 +61,14 @@
                 v-if="!reservation.favorite"
                 @click="addFavorite(reservation, reservation.id)"
               >
-                Add Favorites <v-icon> mdi-heart-settings </v-icon></v-btn
+                {{ $t("home.btnFavorite") }} <v-icon> mdi-heart-settings </v-icon></v-btn
               >
               <v-btn text disabled v-if="reservation.favorite">
-                Add Favorites <v-icon> mdi-heart-settings </v-icon></v-btn
+                {{ $t("home.btnFavorite") }} <v-icon> mdi-heart-settings </v-icon></v-btn
               >
             </v-col>
             <v-col xs="3" sm="3" md="3">
-              <v-btn @click="editReservation(reservation)">Edit</v-btn>
+              <v-btn @click="editReservation(reservation)">{{ $t("home.btnEdit")}}</v-btn>
             </v-col>
           </v-layout>
         </v-card>
@@ -220,17 +220,17 @@ export default {
       },
       api: "https://localhost:5001/api/Bookings",
       itemList: [
-        "By Date Ascending",
-        "By Date Descending",
-        "By Alphabetic Ascending",
-        "By Alphabetic Descending",
-        "By Ranking",
+        "sort.opcion1",
+        "sort.opcion2",
+        "sort.opcion3",
+        "sort.opcion4",
+        "sort.opcion5",
       ],
-      sort: "Sort By",
-      title: "Reservation List",
+      sort: "sort.text",
+      title: "toolBar.title",
       description:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique illum recusandae itaque, ipsam sequi reiciendis reprehenderit ab perspiciatis",
-      btnText: "Create Reservation",
+        "toolBar.des",
+      btnText: "toolBar.btn",
       btnLink: "/AddReservation",
       titleR: null,
       ranking: null,
@@ -287,21 +287,22 @@ export default {
     },
 
     sortBy(prop) {
+      console.log(prop);
       this.sort = prop;
 
-      if (prop === "By Ranking") {
+      if (prop == "sort.opcion5") {
         this.bookings.sort((a, b) => (a.ranking < b.ranking ? -1 : 1));
       }
-      if (prop == "By Alphabetic Ascending") {
+      if (prop == "sort.opcion3") {
         this.bookings.sort((a, b) => (a.title > b.title ? -1 : 1));
       }
-      if (prop == "By Alphabetic Descending") {
+      if (prop == "sort.opcion4" ) {
         this.bookings.sort((a, b) => (a.title < b.title ? -1 : 1));
       }
-      if (prop == "By Date Ascending") {
+      if (prop == "sort.opcion1") {
         this.bookings.sort((a, b) => (a.date > b.date ? -1 : 1));
       }
-      if (prop == "By Date Descending") {
+      if (prop == "sort.opcion2") {
         this.bookings.sort((a, b) => (a.title < b.title ? -1 : 1));
       }
     },

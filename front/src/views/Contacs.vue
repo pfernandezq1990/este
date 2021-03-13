@@ -18,34 +18,7 @@ export default {
   data() {
     return {
       api: "https://localhost:5001/api/contact",
-      title: "Contacts List",
-      headers: [
-        {
-          text: "Name",
-          align: "start",
-          value: "name",
-        },
-        {
-          text: "Contact Type ",
-          align: "start",
-          value: "contactType",
-        },
-        {
-          text: "Phone Number",
-          align: "start",
-          value: "phone",
-        },
-        {
-          text: "Birth Date",
-          align: "start",
-          value: "birthdate",
-        },
-        {
-          text: "Actions",
-          sortable: false,
-          value: "actions",
-        },
-      ],
+      title: "table.title",      
       items: [],
     };
   },
@@ -61,6 +34,35 @@ export default {
     Tolist() {
       return this.$store.getters.Contacts;
     },
+    headers() {
+      return [
+        {          
+          text: this.$t("table.name"),
+          align: "start",
+          value: "name",
+        },
+        {
+          text: this.$t("table.type"),
+          align: "start",
+          value: "contactType",
+        },
+        {
+          text: this.$t("table.phone"),
+          align: "start",
+          value: "phone",
+        },
+        {
+          text: this.$t("table.birthdate"),
+          align: "start",
+          value: "birthdate",
+        },
+        {
+          text: this.$t("table.actions"),
+          sortable: false,
+          value: "actions",
+        },        
+      ]
+    }
   },
 
   methods: {

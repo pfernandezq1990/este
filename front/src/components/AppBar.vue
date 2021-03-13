@@ -24,12 +24,12 @@
           isuc<span class="display-1">orp</span>
         </span>
         <span class="d-none d-sm-flex mx-4 text-subtitle-1">
-          World Class <br />
-          Software Development
+          {{ $t("appBar.Des1") }}<br> {{ $t("appBar.Des2") }}
         </span>
       </v-container>
 
       <v-spacer></v-spacer>
+      <SelectLocale />
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" app clipped dark>
@@ -47,7 +47,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -56,6 +56,7 @@
 </template>
 
 <script>
+import SelectLocale from './SelectLocale'
 export default {
   data() {
     return {
@@ -63,18 +64,19 @@ export default {
       group: null,
       items: [
         {
-          title: "Contact's",
+          title: "links.contact",
           icon: "mdi-account-cog-outline",
           route: "/Contacs",
         },
         {
-          title: "Reservations",
+          title: "links.reservations",
           icon: "mdi-calendar-arrow-right",
           route: "/",
         },
       ],
     };
   },
+  components: { SelectLocale },
 
   watch: {
     group() {
@@ -91,4 +93,8 @@ export default {
 </script>
 
 <style>
+.nav__end {
+  display: flex;
+  align-items: center;
+}
 </style>

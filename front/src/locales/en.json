@@ -1,3 +1,41 @@
 {
-  "message": "hello i18n !!"
+  "appBar": {
+    "Des1": "World Class",
+    "Des2": "Spftware Development"
+  },
+  "links": {
+    "contact": "Contact's",
+    "reservations": "bookings"
+  },
+  "toolBar": {
+    "title": "Reservation List",
+    "des": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique illum recusandae itaque, ipsam sequi reiciendis reprehenderit ab perspiciatis",
+    "btn": "Create Reservation"
+  },
+  "sort": {
+    "opcion1": "By Date Ascending",
+    "opcion2": "By Date Descending",
+    "opcion3": "By Alphabetic Ascending",
+    "opcion4": "By Alphabetic Descending",
+    "opcion5": "By Ranking",
+    "text" : "sort by"
+  },
+  "home": {
+    "btnEdit" : "Edit",
+    "btnFavorite" : "Add Favorite",
+    "textRanking" : "Ranking"
+  },
+  "table": {
+    "title" : "Contacts List",
+    "name" : "Name",
+    "type" : "Contact Type",
+    "phone" : "Phone Number",
+    "birthdate" : "Birthdate",
+    "actions" : "Actions",
+    "footer" : "Contacts per page"
+  },
+  "editForm" : {
+    "cardTitle" : "Edit Contact",
+    "name" : "Name"
+  }
 }

@@ -3,14 +3,14 @@
     <v-card flat align="center">
       <v-layout row wrap>
         <v-col cols="12" xs="12" sm="4" md="4">
-          <h2 class="red--text">{{ title }}</h2>
+          <h2 class="red--text">{{ $t(title) }}</h2>
         </v-col>
         <v-col cols="12" xs="12" md="4" lg="4" class="d-none d-sm-flex">
-          <span class="text--subtitle-1">{{ description }}</span>
+          <span class="text--subtitle-1">{{ $t(description) }}</span>
         </v-col>
         <v-col cols="12" xs="12" md="4" lg="4" >
           <v-btn rounded color="grey" class="white--text" :to="btnLink"
-            >{{ btnText }}
+            >{{ $t(btnText) }}
           </v-btn>
         </v-col>
       </v-layout>

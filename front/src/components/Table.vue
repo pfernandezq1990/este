@@ -1,9 +1,15 @@
 <template>
   <v-container class="my-5">
-    <v-data-table :headers="headers" :items="items">
+    <v-data-table
+      :headers="headers"
+      :items="items"
+      :footer-props="{
+        'items-per-page-text': footerText,
+      }"
+    >
       <template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title>{{ title }}</v-toolbar-title>
+          <v-toolbar-title>{{ $t(title) }}</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
           <v-icon large @click="addItem()"> mdi-plus-thick </v-icon>
@@ -12,7 +18,7 @@
         <!-- Edit Contact -->
         <v-dialog v-model="dialog" max-width="500px">
           <v-card>
-            <v-card-title> Edit Contact </v-card-title>
+            <v-card-title> {{ $t("editForm.cardTitle") }} </v-card-title>
             <v-card-text>
               <v-container>
                 <v-row align="center" justify="center">
@@ -336,6 +342,15 @@ export default {
     },
   },
 
+  computed: {
+    footerText() {
+      return this.$t("table.footer");
+    },
+    pageTxt() {
+      return this.$vuetify.dataFooter.pageText;
+    },
+  },
+
   methods: {
     editItem(item) {
       this.id = item.id;
@@ -391,11 +406,11 @@ export default {
     },
 
     addItem() {
-      this.name = null,
-      this.type = null,
-      this.phone = null,
-      this.date = null,
-      this.dialogAdd = true;
+      (this.name = null),
+        (this.type = null),
+        (this.phone = null),
+        (this.date = null),
+        (this.dialogAdd = true);
     },
 
     save(date) {
