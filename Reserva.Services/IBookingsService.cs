@@ -15,6 +15,6 @@ namespace Reserva.Services
 
         Task Update(Reservation reservation);
 
-        Task<int> Delete(int? id);
+        Task<int> Delete(int? id);        
     }
 }

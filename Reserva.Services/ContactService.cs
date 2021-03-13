@@ -25,6 +25,7 @@ namespace Reserva.Services
 
         public async Task<IEnumerable<Contact>> List()
         {
+            
             return await _context.Contacts.ToListAsync();
         }
 

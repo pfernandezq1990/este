@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Reserva.Data.Models;
 
@@ -11,8 +13,7 @@ namespace Reserva.Data{
         }
 
         public virtual DbSet<Reservation> Bookings{ get; set; }
-        public virtual DbSet<Contact> Contacts { get; set; }
-
+        public virtual DbSet<Contact> Contacts { get; set; }    
         
     }
 }

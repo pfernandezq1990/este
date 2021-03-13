@@ -7,7 +7,7 @@ using Reserva.Data.Models;
 
 namespace Reserva.Services
 {
-    public class BookingsService : IBookingsService
+    public class BookingsService : IBookingsService    
     {
         private readonly ReservationDbContext _context;
 
@@ -66,4 +66,6 @@ namespace Reserva.Services
         }
 
     }
+
+    
 }
