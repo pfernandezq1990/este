@@ -36,6 +36,31 @@
   },
   "editForm" : {
     "cardTitle" : "Edit Contact",
-    "name" : "Name"
+    "name" : "Name",
+    "type" : "Contact Type",
+    "phone" : "Phone Number",
+    "birthdate" :"Birthdate"
+  },
+  "addForm" : {
+    "cardTitle" : "Add Contact",
+    "name" : "Name",
+    "type" : "Contact Type",
+    "phone" : "Phone Number",
+    "birthdate" :"Birthdate"
+  },
+  "addReservationForm" : {
+    "title1" : "Contact Information",
+    "title2" : "Reservation data",
+    "contactName" : "Name",
+    "contactType" : "Contact type",
+    "phone" : "Phone number",
+    "birthdate" : "Birthdate",
+    "reservationTitle" : "Title",
+    "reservationDate" : "Select date time",
+    "reservationRanking" : "Ranking",
+    "reservationFavorite" : "Favorite",
+    "submitBtn" : "submit",
+    "addContactBtn" : "Add new",
+    "addContactText" : "No contact found...."
   }
 }

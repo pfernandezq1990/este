@@ -34,7 +34,7 @@
                           v-model="name"
                           :counter="20"
                           :error-message="errors"
-                          label="Name"
+                          :label="editCardName"
                           required
                         >
                         </v-text-field>
@@ -51,7 +51,7 @@
                           required
                           :items="itemsType"
                           item-text="name"
-                          label="Contact Type"
+                          :label="editCardType"
                           v-model="type"
                         ></v-select>
                       </validation-provider>
@@ -69,7 +69,7 @@
                           v-model="phone"
                           :counter="10"
                           :error-messages="errors"
-                          label="Phone"
+                          :label="editCardPhone"
                           required
                         ></v-text-field>
                       </validation-provider>
@@ -86,7 +86,7 @@
                         <template v-slot:activator="{ on, attrs }">
                           <v-text-field
                             v-model="date"
-                            label="Birthday date"
+                            :label="editCardBirtdate"
                             prepend-icon="mdi-calendar"
                             readonly
                             v-bind="attrs"
@@ -134,7 +134,7 @@
 
         <v-dialog v-model="dialogAdd" max-width="500px">
           <v-card>
-            <v-card-title> Add Contact </v-card-title>
+            <v-card-title> {{ $t("addForm.cardTitle") }} </v-card-title>
             <v-card-text>
               <v-container>
                 <v-row align="center" justify="center">
@@ -150,7 +150,7 @@
                           v-model="name"
                           :counter="20"
                           :error-message="errors"
-                          label="Name"
+                          :label="addCardName"
                           required
                         >
                         </v-text-field>
@@ -167,7 +167,7 @@
                           required
                           :items="itemsType"
                           item-text="name"
-                          label="Contact Type"
+                          :label="addCardType"
                           v-model="type"
                         ></v-select>
                       </validation-provider>
@@ -185,7 +185,7 @@
                           v-model="phone"
                           :counter="10"
                           :error-messages="errors"
-                          label="Phone"
+                          :label="addCardPhone"
                           required
                         ></v-text-field>
                       </validation-provider>
@@ -202,7 +202,7 @@
                         <template v-slot:activator="{ on, attrs }">
                           <v-text-field
                             v-model="date"
-                            label="Birthday date"
+                            :label="addCardBirtdate"
                             prepend-icon="mdi-calendar"
                             readonly
                             v-bind="attrs"
@@ -349,6 +349,30 @@ export default {
     pageTxt() {
       return this.$vuetify.dataFooter.pageText;
     },
+    editCardName() {
+      return this.$t("editForm.name");
+    },
+    editCardType() {
+      return this.$t("editForm.type");
+    },
+    editCardPhone() {
+      return this.$t("editForm.phone");
+    },
+    editCardBirtdate() {
+      return this.$t("editForm.birthdate");
+    },
+    addCardName() {
+      return this.$t("addForm.name");
+    },
+    addCardType() {
+      return this.$t("addForm.type");
+    },
+    addCardPhone() {
+      return this.$t("addForm.phone");
+    },
+    addCardBirtdate() {
+      return this.$t("addForm.birthdate");
+    }
   },
 
   methods: {

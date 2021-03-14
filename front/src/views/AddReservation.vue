@@ -1,16 +1,16 @@
 <template>
   <div class="AddReservation">
     <ToolBar
-      :title="title"
+      :title="btnText"
       :description="description"
-      :btnText="btnText"
+      :btnText="title"
       :btnLink="btnLink"
     />
 
     <v-container class="my-5">
       <v-card>
         <v-card-title>
-          <h3 class="grey--text">Contact Information</h3>
+          <h3 class="grey--text">{{ $t("addReservationForm.title1") }}</h3>
         </v-card-title>
         <v-card-text>
           <validation-observer ref="observer" v-slot="{ invalid }">
@@ -23,16 +23,16 @@
                     @change="autoComplete"
                     :items="Tolist"
                     item-text="name"
-                    label="Name"
+                    :label="addReservationcontactName"
                     v-model="item"
                     return-object
                   >
                     <template slot="no-data">
                       <div class="pa-3">
                         <span class="my-3"
-                          >No contact found.... <br />
+                          >{{ $t("addReservationForm.addContactText") }} <br />
                           <v-btn text color="red" @click="AddContact">
-                            Add new</v-btn
+                            {{ $t("addReservationForm.addContactBtn") }}</v-btn
                           >
                         </span>
                       </div>
@@ -43,7 +43,7 @@
                 <v-col cols="12" xs="12" sm="3" md="3" lg="3">
                   <v-text-field
                     required
-                    label="Contact Type"
+                    :label="addReservationcontactType"
                     v-model="type"
                     readonly
                   ></v-text-field>
@@ -53,7 +53,7 @@
                   <v-text-field
                     required
                     :counter="12"
-                    label="Phone"
+                    :label="addReservationcontactPhone"
                     v-model="phone"
                     readonly
                   ></v-text-field>
@@ -63,14 +63,14 @@
                   <v-text-field
                     readonly
                     v-model="dateContact"
-                    label="Birthday date"
+                    :label="addReservationcontactBirthdate"
                   >
                   </v-text-field>
                 </v-col>
               </v-row>
               <v-divider class="my-16" color="black"></v-divider>
               <v-card-title>
-                <h3 class="grey--text">Reservation data</h3>
+                <h3 class="grey--text">{{ $t("addReservationForm.title2") }} </h3>
               </v-card-title>
 
               <!-- Reservation -->
@@ -86,7 +86,7 @@
                       v-model="titleR"
                       :counter="25"
                       :error-messages="errors"
-                      label="Title"
+                      :label="addReservationTitle"
                       required
                     ></v-text-field>
                   </v-col>
@@ -94,7 +94,7 @@
 
                 <v-col cols="12" xs="12" sm="4" md="4" lg="4">
                   <v-datetime-picker
-                    label="Select Datetime"
+                    :label="addReservationDate"
                     v-model="datetime"
                     :datePickerProps="datepiker"
                   >
@@ -111,7 +111,7 @@
                       :error-messages="errors"
                       required
                       :items="itemsRanking"
-                      label="Ranking"
+                      :label="addReservationRanking"
                       v-model="ranking"
                     ></v-select>
                   </v-col>
@@ -125,7 +125,7 @@
                   <v-col cols="12" xs="12">
                     <v-switch
                       v-model="switch1"
-                      label="Favorite"
+                      :label="addReservationFavorite"
                       :error-messages="errors"
                     ></v-switch>
                   </v-col>
@@ -139,14 +139,14 @@
                   type="submit"
                   :disabled="invalid"
                 >
-                  submit
+                  {{ $t("addReservationForm.submitBtn") }}
                 </v-btn>
               </v-row>
             </form>
           </validation-observer>
           <v-dialog v-model="dialogAdd" max-width="500px">
             <v-card>
-              <v-card-title> Add Contact </v-card-title>
+              <v-card-title> {{ $t("addForm.cardTitle") }} </v-card-title>
               <v-card-text>
                 <v-container>
                   <v-row align="center" justify="center">
@@ -162,7 +162,7 @@
                             v-model="name"
                             :counter="20"
                             :error-message="errors"
-                            label="Name"
+                            :label="addContactFormName"
                             required
                           >
                           </v-text-field>
@@ -179,7 +179,7 @@
                             required
                             :items="items"
                             item-text="name"
-                            label="Contact Type"
+                            :label="addContactFormType"
                             v-model="type"
                           ></v-select>
                         </validation-provider>
@@ -197,7 +197,7 @@
                             v-model="phone"
                             :counter="10"
                             :error-messages="errors"
-                            label="Phone"
+                            :label="addContactFormPhone"
                             required
                           ></v-text-field>
                         </validation-provider>
@@ -214,7 +214,7 @@
                           <template v-slot:activator="{ on, attrs }">
                             <v-text-field
                               v-model="date"
-                              label="Birthday date"
+                              :label="addContactFormBirthdate"
                               prepend-icon="mdi-calendar"
                               readonly
                               v-bind="attrs"
@@ -298,10 +298,10 @@ export default {
     return {
       api: "https://localhost:5001/api/contact",
       apiR: "https://localhost:5001/api/Bookings",
-      title: "Create Reservation",
+      title: "toolBar.title",
       description:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique illum recusandae itaque, ipsam sequi reiciendis reprehenderit ab perspiciatis",
-      btnText: "List Reservation",
+        "toolBar.des",
+      btnText: "toolBar.btn",
       btnLink: "/",
 
       contact: null,
@@ -351,6 +351,43 @@ export default {
     Tolist() {
       return this.$store.getters.Contacts;
     },
+    addReservationcontactName() {
+      return this.$t("addReservationForm.contactName");
+    },
+    addReservationcontactType() {
+      return this.$t("addReservationForm.contactType");
+    },
+    addReservationcontactPhone() {
+      return this.$t("addReservationForm.phone");
+    },
+    addReservationcontactBirthdate() {
+      return this.$t("addReservationForm.birthdate");
+    },
+    addReservationTitle() {
+      return this.$t("addReservationForm.reservationTitle");
+    },
+    addReservationDate() {
+      return this.$t("addReservationForm.reservationDate");
+    },
+    addReservationRanking() {
+      return this.$t("addReservationForm.reservationRanking");
+    },
+    addReservationFavorite() {
+      return this.$t("addReservationForm.reservationFavorite");
+    },
+    addContactFormName() {
+      return this.$t("addForm.name");
+    },
+    addContactFormType() {
+      return this.$t("addForm.type");
+    },
+    addContactFormPhone() {
+      return this.$t("addForm.phone");
+    },
+    addContactFormBirthdate() {
+      return this.$t("addForm.birthdate");
+    },
+    
   },
 
   methods: {
