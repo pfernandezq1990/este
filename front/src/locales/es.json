@@ -62,5 +62,8 @@
         "submitBtn": "salvar",
         "addContactBtn": "Añadir Contacto",
         "addContactText": "Ningun contacto encontrado...."
+    },
+    "lastext" : { 
+      "text" : "Aun en desarrollo"
     }
 }

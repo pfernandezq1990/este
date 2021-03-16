@@ -257,7 +257,14 @@
         <v-icon small class="mr-2" @click="deleteItem(item)">
           mdi-delete
         </v-icon>
-        <v-icon small class="mr-2" @click="seeBookings(item)">mdi-calendar-account</v-icon>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon small class="mr-2" v-bind="attrs" v-on="on"
+              >mdi-calendar-account</v-icon
+            >
+          </template>
+          <span>{{ $t("lastext.text") }} </span>
+        </v-tooltip>
       </template>
     </v-data-table>
   </v-container>
@@ -272,7 +279,7 @@ import {
   ValidationProvider,
   setInteractionMode,
 } from "vee-validate";
-import StoreProcedure from './Sp'
+import StoreProcedure from "./Sp";
 
 setInteractionMode("eager");
 
@@ -381,7 +388,7 @@ export default {
     },
     addCardBirtdate() {
       return this.$t("addForm.birthdate");
-    }
+    },
   },
 
   methods: {
@@ -409,11 +416,11 @@ export default {
     },
 
     seeBookings(item) {
-      let id = item.id;      
-      axios.get(`${this.bookingApi}/${id}`).then( (Response) => {
-          this.bookingList = Response.data;
-          this.dialogBookings = true;
-      })
+      let id = item.id;
+      axios.get(`${this.bookingApi}/${id}`).then((Response) => {
+        this.bookingList = Response.data;
+        this.dialogBookings = true;
+      });
     },
 
     editarContact() {
