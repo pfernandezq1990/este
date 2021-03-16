@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Reserva.Data.Models;
+using Reserva.Data.VM;
 
 namespace Reserva.Services
 {
@@ -16,5 +17,8 @@ namespace Reserva.Services
         Task Update(Reservation reservation);
 
         Task<int> Delete(int? id);        
+
+        // Task<string> GetContact(int contact_id);
+
     }
 }

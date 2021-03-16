@@ -137,6 +137,22 @@ namespace Reserva.Web.Controllers
             }
         }
 
-      
+        // [HttpGet]
+        // [Route("booking/{id}")]
+        // public async Task<IActionResult> GetBookingsContac(int contact_id) {
+        //     try
+        //     {
+        //         var bookings = service.GetReservations(contact_id);
+        //         if (bookings == null)
+        //         {
+        //             return NotFound();
+        //         }
+        //         return Ok(bookings);
+        //     }
+        //     catch (Exception)
+        //     {                
+        //         return BadRequest();
+        //     }
+        // }
     }
 }

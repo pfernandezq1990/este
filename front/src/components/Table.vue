@@ -245,6 +245,9 @@
             </v-card-text>
           </v-card>
         </v-dialog>
+        <v-dialog v-model="dialogBookings" max-width="500px">
+          <StoreProcedure :items="bookingList" />
+        </v-dialog>
       </template>
       <template v-slot:[`item.birthdate`]="{ item }">
         <p>{{ item.birthdate | date }}</p>
@@ -254,6 +257,7 @@
         <v-icon small class="mr-2" @click="deleteItem(item)">
           mdi-delete
         </v-icon>
+        <v-icon small class="mr-2" @click="seeBookings(item)">mdi-calendar-account</v-icon>
       </template>
     </v-data-table>
   </v-container>
@@ -268,6 +272,7 @@ import {
   ValidationProvider,
   setInteractionMode,
 } from "vee-validate";
+import StoreProcedure from './Sp'
 
 setInteractionMode("eager");
 
@@ -306,6 +311,9 @@ export default {
   },
   data() {
     return {
+      bookingApi: "https://localhost:5001/api/contact/booking",
+      bookingList: [],
+      dialogBookings: false,
       name: null,
       date: null,
       menu: false,
@@ -334,6 +342,7 @@ export default {
   components: {
     ValidationProvider,
     ValidationObserver,
+    StoreProcedure,
   },
 
   watch: {
@@ -394,10 +403,17 @@ export default {
     },
     deleteItem(item) {
       let id = item.id;
-      console.log(id);
       axios.delete(`${this.api}/${id}`).then(() => {
         this.$store.dispatch("loadContacts", this.api);
       });
+    },
+
+    seeBookings(item) {
+      let id = item.id;      
+      axios.get(`${this.bookingApi}/${id}`).then( (Response) => {
+          this.bookingList = Response.data;
+          this.dialogBookings = true;
+      })
     },
 
     editarContact() {

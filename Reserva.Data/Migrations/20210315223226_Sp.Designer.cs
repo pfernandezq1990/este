@@ -10,8 +10,8 @@ using Reserva.Data;
 namespace Reserva.Data.Migrations
 {
     [DbContext(typeof(ReservationDbContext))]
-    [Migration("20210314211957_getBookings")]
-    partial class getBookings
+    [Migration("20210315223226_Sp")]
+    partial class Sp
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
